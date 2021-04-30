@@ -43,7 +43,7 @@
 			etc -->
 		<dependency>
 			<groupId>org.webjars</groupId>
-			<artifactId>webjars-locator-core</artifactId> <!-- na aula existe uma atualizacao de versao-->
+			<artifactId>webjars-locator-core</artifactId> <!-- na aula existe uma atualizacao de versao -->
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -64,6 +64,13 @@
 			<groupId>org.webjars.bower</groupId>
 			<artifactId>jquery-mask-plugin</artifactId>
 			<version>1.14.13</version>
+		</dependency>
+
+		<!-- Starter necessario para o spring utilizar as bibliotecas basicas de 
+			JPA/Hibernate -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 	</dependencies>
