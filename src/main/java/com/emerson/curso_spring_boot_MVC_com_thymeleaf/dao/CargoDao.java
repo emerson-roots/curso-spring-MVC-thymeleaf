@@ -1,4 +1,4 @@
-package com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.dao;
+package com.emerson.curso_spring_boot_MVC_com_thymeleaf.dao;
 
 import java.util.List;
 
