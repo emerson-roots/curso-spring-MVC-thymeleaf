@@ -14,6 +14,7 @@ import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Departamento;
 //na aula foi utilizado a anotação somente nos metodos
 //de leitura, invés de usar diretamente na assinatura da classe
 @Service
+@Transactional
 public class DepartamentoServiceImpl implements DepartamentoService {
 
 	@Autowired
