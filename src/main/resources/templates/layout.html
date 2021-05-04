@@ -54,6 +54,26 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
+		//aula 40 - 7:00
+		var url = '';
+
+		//função Jquery - armazena a URL concatenada ao endpoint de exclusão+id
+		//e envia para uma janela modal
+		$('button[id*="btn_"]').click(function() {
+			//pega o atributo de botões com id que começam com "btn_"
+			//e divide a string em partes quebrando a partir do caractere "_"
+			//e concatena o index 1 a URL base localhost
+			url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
+		});
+
+		//após receber a URL da janela modal, monitora cliques de botao de confirma da janela MODAL
+		$('#ok_confirm').click(function() {
+			//ao ser clicado no botao, faz uma solicitacao de acordo com a url recebida por variavel
+			document.location.href = url;
+		});
+		//aula 40 - 7:00
+		//____________________________________________________________
+
 		$(function() {
 			$('[data-toggle="popover"]').popover();
 		});
