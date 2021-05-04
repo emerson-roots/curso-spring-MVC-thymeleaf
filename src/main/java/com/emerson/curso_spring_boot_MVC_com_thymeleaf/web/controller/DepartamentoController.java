@@ -24,7 +24,7 @@ public class DepartamentoController {
 
 	// endpoint para pagina de cadastro de departamentos
 	@GetMapping("/cadastrar")
-	public String cadastrar(Departamento departamento) {
+	public String cadastrar(Departamento departamentoo) {
 		return "/departamento/cadastro";
 	}
 
@@ -56,11 +56,27 @@ public class DepartamentoController {
 		model.addAttribute("departamento", objDepto);
 		return "/departamento/cadastro";
 	}
-	
-	//aula 38
+
+	// aula 38
 	@PostMapping("/editar")
 	public String editar(Departamento departamento) {
 		service.editar(departamento);
 		return "redirect:/departamentos/cadastrar";
+	}
+
+	// aula 39
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id, ModelMap model) {
+
+		// somente exclui departamentos se não possuir nenhumcargo relacionado
+		if (!service.departamentoTemCargos(id)) {
+			service.excluir(id);
+		}
+
+		// redirect: em aulas anteriores foi utilizado o redirect
+		// porém nesta aula o professor abordou uma outra forma
+		// de redirecionar para outra pagina do projeto
+		// chamando apenas o metodo
+		return listar(model);
 	}
 }

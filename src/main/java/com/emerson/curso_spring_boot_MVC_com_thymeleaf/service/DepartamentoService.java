@@ -15,5 +15,8 @@ public interface DepartamentoService {
 	Departamento buscarPorId(Long id);
 
 	List<Departamento> buscarTodos();
+	
+	//aula 39, verifica se departamento contém cargos antes de excluir
+	boolean departamentoTemCargos(Long id);
 
 }

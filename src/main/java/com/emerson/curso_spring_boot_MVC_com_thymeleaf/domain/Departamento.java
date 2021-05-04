@@ -18,6 +18,10 @@ public class Departamento extends AbstractEntity<Long> {
 	@OneToMany(mappedBy = "departamento")
 	private List<Cargo> cargos;
 
+	public final List<Cargo> getCargos() {
+		return cargos;
+	}
+
 	public String getNome() {
 		return nome;
 	}
