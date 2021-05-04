@@ -24,7 +24,8 @@
 		<!-- aula 36: th:object e th:field: sao capazes de instanciar um objeto e setar seus atributos -->
 		<div class="container" id="cadastro">
 			<!-- atenção: AULA 36: 7:50 - o objeto "${departamento}" deve estar também declarado no backend/endpoint de acesso a pagina de cadastro, caso contrario lança excessão -->
-			<form th:action="@{/departamentos/salvar}"
+			<form
+				th:action="${departamento.id == null} ? @{/departamentos/salvar} : @{/departamentos/editar}"
 				th:object="${departamento}" method="POST">
 				<div class="form-row">
 					<div class="form-group col-md-6">
@@ -33,7 +34,7 @@
 							autofocus="autofocus" th:field="*{nome}" />
 					</div>
 				</div>
-				<input type="hidden" id="id" name="id" value="" />
+				<input type="hidden" id="id" th:field="*{id}" />
 				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 			</form>
 		</div>
