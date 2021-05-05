@@ -1,0 +1,26 @@
+	<!-- aula 41 - não foi usado o th:fragment neste documento HTML pois a própria página em si sera usada como um fragmento-->
+	<!-- aula 41 - 1° uso foi feito na paginda de cadastros de departamentos usando a tag th:replace em uma div -->
+	<!-- aula 41 - quem comanda os alerts são os métodos do controller -->
+	<div th:if="${variavelSuccessDoControllerParaFrontend} != null">
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+		  <i class="oi oi-check"></i>
+		  <span>
+		  	<strong th:text="${variavelSuccessDoControllerParaFrontend}"></strong> 
+		  </span>
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+	</div>
+	
+	<div th:if="${variavelFailDoControllerParaFrontend} != null">
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  <i class="oi oi-check"></i>
+		  <span>
+		  	<strong th:text="${variavelFailDoControllerParaFrontend}"></strong>
+		  </span>
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+	</div>

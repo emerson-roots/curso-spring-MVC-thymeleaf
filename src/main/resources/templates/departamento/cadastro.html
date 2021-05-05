@@ -23,6 +23,10 @@
 
 		<!-- aula 36: th:object e th:field: sao capazes de instanciar um objeto e setar seus atributos -->
 		<div class="container" id="cadastro">
+			<!-- aula 41 - usa a pagina de alert como um fragmento para exibir mensagens de sucess ou fail -->
+			<!-- aula 41 - quem comanda os alerts são os métodos do controller -->
+			<div th:replace="fragments/alert"></div>
+			
 			<!-- atenção: AULA 36: 7:50 - o objeto "${departamento}" deve estar também declarado no backend/endpoint de acesso a pagina de cadastro, caso contrario lança excessão -->
 			<form
 				th:action="${departamento.id == null} ? @{/departamentos/salvar} : @{/departamentos/editar}"

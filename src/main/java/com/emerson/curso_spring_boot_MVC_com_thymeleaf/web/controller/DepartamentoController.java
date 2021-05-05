@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Departamento;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.service.DepartamentoService;
@@ -43,8 +44,13 @@ public class DepartamentoController {
 
 	// aula 36
 	@PostMapping("/salvar")
-	public String salvar(Departamento departamento) {
+	public String salvar(Departamento departamento, RedirectAttributes attr) {
 		service.salvar(departamento);
+		
+		// na aula 41 - 7:01 - foi aprendido o por que usamos RedirectAttributes
+		// como parametro aqui para enviar atributos ao frontend inves do modelmap.
+		// o simples fato de usar um redirect para redirecionar a página
+		attr.addFlashAttribute("variavelSuccessDoControllerParaFrontend", "Departamento inserido com sucesso!");
 		return "redirect:/departamentos/cadastrar";
 	}
 
@@ -59,8 +65,14 @@ public class DepartamentoController {
 
 	// aula 38
 	@PostMapping("/editar")
-	public String editar(Departamento departamento) {
+	public String editar(Departamento departamento, RedirectAttributes attr) {
+
 		service.editar(departamento);
+		
+		// na aula 41 - 7:01 - foi aprendido o por que usamos RedirectAttributes
+		// como parametro aqui para enviar atributos ao frontend inves do modelmap.
+		// o simples fato de usar um redirect para redirecionar a página
+		attr.addFlashAttribute("variavelSuccessDoControllerParaFrontend", "Departamento editado com sucesso!");
 		return "redirect:/departamentos/cadastrar";
 	}
 
@@ -68,9 +80,14 @@ public class DepartamentoController {
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
 
-		// somente exclui departamentos se não possuir nenhumcargo relacionado
-		if (!service.departamentoTemCargos(id)) {
+		// somente exclui departamentos se não possuir nenhum cargo relacionado
+		// caso contrario envia uma variavel
+		if (service.departamentoTemCargos(id)) {
+			model.addAttribute("variavelFailDoControllerParaFrontend",
+					"Departamento não removido pois possui cargos vinculados.");
+		} else {
 			service.excluir(id);
+			model.addAttribute("variavelSucessDoControllerParaFrontend", "Departamento excluido com sucesso.");
 		}
 
 		// redirect: em aulas anteriores foi utilizado o redirect
