@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <!-- aula 34 - lembrar de usar o layout:fragment na section em conjunto do layout:decorate -->
 <html layout:decorate="~{layout}">
+
 <head>
-<meta charset="UTF-8" />
+	<meta charset="UTF-8" />
 </head>
+
 <body>
 	<!-- aula 34 - lembrar de usar o layout:fragment na section em conjunto do layout:decorate -->
 	<section class="layout-content" layout:fragment="corpo">
@@ -11,8 +13,10 @@
 		<nav class="navbar navbar-expand-md bg-light">
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span>Cadastrar Cargos</span></li>
+					<li class="nav-item active">
+						<i class="oi oi-caret-right"></i>
+						<span>Cadastrar Cargos</span>
+					</li>
 				</ul>
 			</div>
 			<a class="btn btn-primary btn-md" href="/cargos/listar" role="button">
@@ -21,22 +25,27 @@
 			</a>
 		</nav>
 
+		<!-- Aula 53 - foi inserido as tags th do thymeleaf e as expressões EL -->
 		<div class="container" id="cadastro">
-			<form action="/cargos/salvar" method="POST">
+		
+			<!-- aula 41 - usa a pagina de alert como um fragmento para exibir mensagens de sucess ou fail -->
+			<!-- aula 41 - quem comanda os alerts são os métodos do controller -->
+			<div th:replace="fragments/alert"></div>
+
+			<form th:action="@{/cargos/salvar}" th:object="${cargo}" method="POST">
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="nome">Nome do Cargo</label> <input type="text"
-							class="form-control" id="nome" placeholder="Nome Cargo"
-							autofocus="autofocus" name="nome" value="" />
+						<label for="nome">Nome do Cargo</label>
+						<input type="text" class="form-control" id="nome" placeholder="Nome Cargo" autofocus="autofocus"
+							th:field="*{nome}" />
 					</div>
 					<div class="form-group col-md-4">
-						<label for="departamento">Departamento</label> <select
-							id="departamento" class="form-control" name="departamento">
+						<label for="departamento">Departamento</label>
+						<select id="departamento" class="form-control" th:field="*{departamento}">
 							<option value="">Selecione</option>
-							<option value="3">Administração</option>
-							<option value="2">Contabilidade</option>
-							<option value="1">Recursos Humanos</option>
-							<option value="4">Tecnologia da Informação</option>
+							<option th:each="nomeVariavelQualquer : ${variavelDepartamentoDoControllerParaFrontend}"
+								th:value="${nomeVariavelQualquer.id}" th:text="${nomeVariavelQualquer.nome}">
+								Administração</option>
 						</select>
 					</div>
 				</div>
@@ -47,4 +56,5 @@
 	</section>
 
 </body>
+
 </html>
