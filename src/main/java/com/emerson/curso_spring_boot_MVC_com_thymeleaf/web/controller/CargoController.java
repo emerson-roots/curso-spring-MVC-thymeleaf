@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,14 @@ public class CargoController {
 	}
 
 	@GetMapping("/listar")
-	public String listar() {
+	public String listar(ModelMap model) {
+		
+		List<Cargo> lista = cargoService.buscarTodos();
+
+		// adiciona uma lista de objetos a váriavel definida no frontend HTML
+		// cargosVariavelController é exatamente a váriavel
+		// presenta no documento HTML de listar os cargos
+		model.addAttribute("cargosVariavelController", lista);
 		return "/cargo/lista";
 	}
 
