@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -59,4 +60,21 @@ public class CargoController {
 		return departamentoService.buscarTodos();
 	}
 
+	// aula 46
+	// carrega a pagina com os dados do item selecionado para edicao
+	@GetMapping("/editar/{id}")
+	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
+		Cargo objDepto = cargoService.buscarPorId(id);
+		model.addAttribute("cargo", objDepto);
+		return "/cargo/cadastro";
+	}
+
+	//aula 46
+	@PostMapping("/editar")
+	public String editar(Cargo cargo, RedirectAttributes attr) {
+		cargoService.editar(cargo);
+		attr.addFlashAttribute("variavelSuccessDoControllerParaFrontend", "Cargo editado com sucesso!");
+		return "redirect:/cargos/cadastrar";
+	}
+	
 }
