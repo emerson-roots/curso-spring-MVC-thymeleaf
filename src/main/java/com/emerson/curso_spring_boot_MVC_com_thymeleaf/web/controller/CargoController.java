@@ -77,4 +77,16 @@ public class CargoController {
 		return "redirect:/cargos/cadastrar";
 	}
 	
+	//aula 47
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
+		if (cargoService.cargoTemFuncionarios(id)) {
+			attr.addFlashAttribute("variavelFailDoControllerParaFrontend", "Cargo não excluido. Tem funcionário(s) vinculado(s).");
+		} else {
+			cargoService.excluir(id);
+			attr.addFlashAttribute("variavelSuccessDoControllerParaFrontend", "Cargo excluido com sucesso.");
+		}
+		return "redirect:/cargos/listar";
+	}
+	
 }

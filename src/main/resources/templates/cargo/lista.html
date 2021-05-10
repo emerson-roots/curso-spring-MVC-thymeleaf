@@ -22,6 +22,11 @@
 		</nav>
 
 		<div class="container" id="listagem">
+		
+			<!-- aula 41 - usa a pagina de alert como um fragmento para exibir mensagens de sucess ou fail -->
+			<!-- aula 41 - quem comanda os alerts são os métodos do controller -->
+			<div th:replace="fragments/alert"></div>
+			
 			<div class="table-responsive">
 				<table class="table table-striped table-hover table-sm">
 					<thead>
@@ -33,7 +38,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="nomeVariavelQlqr: ${cargosVariavelController}">
+						<tr th:each="nomeVariavelQlqr : ${cargosVariavelController}">
 							<td th:text="${nomeVariavelQlqr.id}">1</td>
 							<td th:text="${nomeVariavelQlqr.nome}"></td>
 							<td th:text="${nomeVariavelQlqr.departamento.nome}"></td>
@@ -41,15 +46,20 @@
 								<a class="btn btn-info btn-sm" th:href="@{/cargos/editar/{id} (id=${nomeVariavelQlqr.id})}" role="button"> 
 									<span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 								</a>
-								<button type="button" class="btn btn-danger btn-sm">
-									<span class="oi oi-circle-x" title="Exclusão desabilitada"
-										aria-hidden="true"></span>
-								</button></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+									<!-- aula 47 - nova forma de concatenar valores no documento HTML utilizando recursos do próprio thymeleaf -->
+		                            <button th:id="${#strings.concat('btn_cargos/excluir/', nomeVariavelQlqr.id)}" type="button" 
+		                                    class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+		                                <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
+		                            </button>
+		                        </td>
+		                    </tr>	
+	                    </tbody>
+	                </table>
+	            </div>
+	        </div>
+	        
+	        <!-- aula 47 -->
+	        <div th:replace="fragments/modal :: modal"></div>
 
 	</section>
 
