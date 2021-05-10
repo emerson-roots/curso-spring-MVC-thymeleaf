@@ -14,22 +14,26 @@ import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
 //na aula foi utilizado a anotação somente nos metodos
 //de leitura, invés de usar diretamente na assinatura da classe
 @Service
+@Transactional(readOnly = true)
 public class FuncionarioServiceImpl implements FuncionarioService {
 
 	@Autowired
 	private FuncionarioDao dao;
-
+	
+	@Transactional(readOnly = false)
 	@Override
 	public void salvar(Funcionario funcionario) {
 		dao.save(funcionario);
 
 	}
-
+	
+	@Transactional(readOnly = false)
 	@Override
 	public void editar(Funcionario funcionario) {
 		dao.update(funcionario);
 	}
-
+	
+	@Transactional(readOnly = false)
 	@Override
 	public void excluir(Long id) {
 		dao.delete(id);
