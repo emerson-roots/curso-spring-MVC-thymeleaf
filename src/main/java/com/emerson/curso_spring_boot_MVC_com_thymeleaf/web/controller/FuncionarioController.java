@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Cargo;
@@ -88,4 +89,22 @@ public class FuncionarioController {
 		return "redirect:/funcionarios/listar";
 	}
 
+	/**
+	 * aula 53 DAR ATENÇÃO ESPECIAL AO NOME DA VARIAVEL DO METODO ADDATTRIBUTE
+	 */
+	@GetMapping("/buscar/nome")
+	public String getPorNome(@RequestParam("nome") String nome, ModelMap model) {
+		List<Funcionario> obj = funcionarioService.buscarPorNome(nome);
+
+		// ATENÇÃO AO NOME DA VARIÁVEL DO METODO ADDATRIBUTE.
+		//
+		// o metodo "listar" aqui da classe utiliza uma variavel para acessar a lista de
+		// funcionarios
+		// qualquer outro metodo que seja necessário enviar parametros para a view
+		// deve UTILIZAR O MESMO NOME DE VARIAVEL da pagina que acessa a lista
+		// em testes, tentei colocar uma váriavel diferente
+		// e a consulta por nome não estava retornando registros
+		model.addAttribute("funcionariosVariavelController", obj);
+		return "/funcionario/lista";
+	}
 }
