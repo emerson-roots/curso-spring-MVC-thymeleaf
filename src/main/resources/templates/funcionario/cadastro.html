@@ -28,7 +28,7 @@
 			<!-- aula 41 - quem comanda os alerts são os métodos do controller -->
 			<div th:replace="fragments/alert"></div>
 		
-			<form th:action="@{/funcionarios/salvar}" method="POST"
+			<form th:action="${funcionario.id == null} ? @{/funcionarios/salvar} : @{/funcionarios/editar}" method="POST"
 				  th:object="${funcionario}">
 				<div class="form-row">
 					<div class="form-group col-md-6">
@@ -104,8 +104,9 @@
 						<div class="invalid-feedback"></div>
 					</div>
 					<div class="form-group col-md-4">
-						<label for="uf">UF</label> <select id="uf" class="form-control"
-							name="endereco.uf">
+						<label for="uf">UF</label> 
+						<select id="uf" class="form-control"
+							th:field="*{endereco.uf}">
 							<option value="">Selecione...</option>
 							<option th:each="nomeVariavelUFQlqr : ${variavelUFsDoControllerParaFrontend}" 
 							th:value="${nomeVariavelUFQlqr}" th:text="${nomeVariavelUFQlqr.sigla}"></option>
@@ -122,7 +123,8 @@
 						<div class="invalid-feedback"></div>
 					</div>
 				</div>
-				<input type="hidden" id="id" name="id" value="" />
+				<input type="hidden" id="id" th:field="*{id}" />
+				<input type="hidden" id="endereco.id" th:field="*{endereco.id}" />
 				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 			</form>
 		</div>
