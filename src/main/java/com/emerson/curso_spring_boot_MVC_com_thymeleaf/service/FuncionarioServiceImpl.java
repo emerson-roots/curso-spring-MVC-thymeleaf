@@ -64,5 +64,11 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	public List<Funcionario> buscarPorNome(String nome) {
 		return dao.findByNome(nome);
 	}
+	
+	// aula 54
+	@Override
+	public List<Funcionario> buscarPorCargo(Long id) {
+		return dao.findByCargoId(id);
+	}
 
 }

@@ -18,5 +18,8 @@ public interface FuncionarioService {
 	
 	//aula 53
 	List<Funcionario> buscarPorNome(String nome);
+	
+	//aula 54
+	List<Funcionario> buscarPorCargo(Long id);
 
 }

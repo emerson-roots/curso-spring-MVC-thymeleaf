@@ -107,4 +107,12 @@ public class FuncionarioController {
 		model.addAttribute("funcionariosVariavelController", obj);
 		return "/funcionario/lista";
 	}
+	
+	//aula 54
+	@GetMapping("/buscar/cargo")
+	public String getPorCargo(@RequestParam("id") Long id, ModelMap model) {
+		List<Funcionario> obj = funcionarioService.buscarPorCargo(id);
+		model.addAttribute("funcionariosVariavelController", obj);
+		return "/funcionario/lista";
+	}
 }
