@@ -34,6 +34,12 @@
 
 			<form th:action="${cargo.id == null} ? @{/cargos/salvar} : @{/cargos/editar}" 
 				  th:object="${cargo}" method="POST">
+				  
+				<!-- aula 57 - IMPORTANTE:
+					PARA FUNCIONAR, ESTE FRAGMENTO DEVE ESTAR DENTRO DE UM FORM
+				inclui fragmento na tela caso algum campo nao passe na validação -->
+				<div th:replace="fragments/validacao :: validacao"></div>  
+				  
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="nome">Nome do Cargo</label>

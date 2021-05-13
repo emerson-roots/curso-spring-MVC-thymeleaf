@@ -2,9 +2,12 @@ package com.emerson.curso_spring_boot_MVC_com_thymeleaf.web.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,8 +49,17 @@ public class CargoController {
 	}
 
 	// aula 43
+	//na aula 57 foi abordado a anotação @Valid e o parametro BindingResult
+	//utilizados para validar campos
 	@PostMapping("/salvar")
-	public String salvar(Cargo cargo, RedirectAttributes attr) {
+	public String salvar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
+		
+		// implementado na aula 57
+		// caso encontre erros na validação dos campos
+		if (result.hasErrors()) {
+			return "/cargo/cadastro";
+		}
+		
 		cargoService.salvar(cargo);
 		attr.addFlashAttribute("variavelSuccessDoControllerParaFrontend", "Cargo inserido com sucesso.");
 		return "redirect:/cargos/cadastrar";
@@ -70,8 +82,16 @@ public class CargoController {
 	}
 
 	//aula 46
+	//na aula 57 foi abordado a anotação @Valid e o parametro BindingResult
+	//utilizados para validar campos
 	@PostMapping("/editar")
-	public String editar(Cargo cargo, RedirectAttributes attr) {
+	public String editar(@Valid Cargo cargo, BindingResult result ,RedirectAttributes attr) {
+		
+		// implementado na aula 57
+		// caso encontre erros na validação dos campos
+		if (result.hasErrors()) {
+			return "/cargo/cadastro";
+		}
 		cargoService.editar(cargo);
 		attr.addFlashAttribute("variavelSuccessDoControllerParaFrontend", "Cargo editado com sucesso!");
 		return "redirect:/cargos/cadastrar";

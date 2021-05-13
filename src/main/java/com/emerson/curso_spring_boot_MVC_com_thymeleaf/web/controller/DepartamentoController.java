@@ -2,9 +2,12 @@ package com.emerson.curso_spring_boot_MVC_com_thymeleaf.web.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,8 +46,17 @@ public class DepartamentoController {
 	}
 
 	// aula 36
+	//na aula 57 foi abordado a anotação @Valid e o parametro BindingResult
+	//utilizados para validar campos
 	@PostMapping("/salvar")
-	public String salvar(Departamento departamento, RedirectAttributes attr) {
+	public String salvar(@Valid Departamento departamento, BindingResult result, RedirectAttributes attr) {
+		
+		// implementado na aula 57
+		// caso encontre erros na validação dos campos
+		if (result.hasErrors()) {
+			return "/departamento/cadastro";
+		}
+		
 		service.salvar(departamento);
 		
 		// na aula 41 - 7:01 - foi aprendido o por que usamos RedirectAttributes
@@ -65,8 +77,16 @@ public class DepartamentoController {
 
 	// aula 38
 	@PostMapping("/editar")
-	public String editar(Departamento departamento, RedirectAttributes attr) {
-
+	//na aula 57 foi abordado a anotação @Valid e o parametro BindingResult
+	//utilizados para validar campos
+	public String editar(@Valid Departamento departamento, BindingResult result,RedirectAttributes attr) {
+		
+		// implementado na aula 57
+		// caso encontre erros na validação dos campos
+		if (result.hasErrors()) {
+			return "/departamento/cadastro";
+		}
+		
 		service.editar(departamento);
 		
 		// na aula 41 - 7:01 - foi aprendido o por que usamos RedirectAttributes
