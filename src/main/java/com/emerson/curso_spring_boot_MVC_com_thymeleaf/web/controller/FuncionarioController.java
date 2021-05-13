@@ -1,8 +1,10 @@
 package com.emerson.curso_spring_boot_MVC_com_thymeleaf.web.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -107,11 +109,23 @@ public class FuncionarioController {
 		model.addAttribute("funcionariosVariavelController", obj);
 		return "/funcionario/lista";
 	}
-	
-	//aula 54
+
+	// aula 54
 	@GetMapping("/buscar/cargo")
 	public String getPorCargo(@RequestParam("id") Long id, ModelMap model) {
 		List<Funcionario> obj = funcionarioService.buscarPorCargo(id);
+		model.addAttribute("funcionariosVariavelController", obj);
+		return "/funcionario/lista";
+	}
+
+	// aula 55
+	// a anotação @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	// serve para convertar a data la no front-end para o tipo LocalDate
+	@GetMapping("/buscar/data")
+	public String getPorDatas(@RequestParam(name="entrada", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate entrada, 
+							  @RequestParam(name="saida", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate saida,
+							  ModelMap model) {
+		List<Funcionario> obj = funcionarioService.buscarPorDatas(entrada, saida);
 		model.addAttribute("funcionariosVariavelController", obj);
 		return "/funcionario/lista";
 	}

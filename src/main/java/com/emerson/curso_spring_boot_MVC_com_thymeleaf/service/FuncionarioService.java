@@ -1,5 +1,6 @@
 package com.emerson.curso_spring_boot_MVC_com_thymeleaf.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
@@ -21,5 +22,8 @@ public interface FuncionarioService {
 	
 	//aula 54
 	List<Funcionario> buscarPorCargo(Long id);
+	
+	//aula 55
+	List<Funcionario> buscarPorDatas(LocalDate entrada, LocalDate saida);
 
 }
