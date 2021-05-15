@@ -10,7 +10,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,7 @@ import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.enums.UF;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.service.CargoService;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.service.FuncionarioService;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.web.validator.FuncionarioValidator;
 
 //aula 12
 @Controller
@@ -34,7 +37,21 @@ public class FuncionarioController {
 	private FuncionarioService funcionarioService;
 	@Autowired
 	private CargoService cargoService;
-
+	
+	//aula 60 - criado para validar a regra de negocio referente[
+	//as datas e entrada e saida
+	//onde a data de saida nao pode ser MENOR que a data de entrada
+	//tem vinculo com a classe FuncionarioValidator
+	//
+	//a anotação @InitBinder diz para a aplicação que este metodo 
+	//sera o primeiro metodo da classe que vai ser executado
+	//e ao ser executado, o Spring MVC vai até a classe FuncionarioValidator
+	//fazer a validação, antes de liberar a requisição ao metodo salvar ou editar
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.addValidators(new FuncionarioValidator());
+	}
+	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Funcionario funcionario) {
 		return "/funcionario/cadastro";
