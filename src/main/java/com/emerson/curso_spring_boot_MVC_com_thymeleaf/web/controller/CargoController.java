@@ -33,7 +33,7 @@ public class CargoController {
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Cargo cargo) {
-		return "/cargo/cadastro";
+		return "cargo/cadastro";
 	}
 
 	@GetMapping("/listar")
@@ -45,7 +45,7 @@ public class CargoController {
 		// cargosVariavelController é exatamente a váriavel
 		// presenta no documento HTML de listar os cargos
 		model.addAttribute("cargosVariavelController", lista);
-		return "/cargo/lista";
+		return "cargo/lista";
 	}
 
 	// aula 43
@@ -57,7 +57,7 @@ public class CargoController {
 		// implementado na aula 57
 		// caso encontre erros na validação dos campos
 		if (result.hasErrors()) {
-			return "/cargo/cadastro";
+			return "cargo/cadastro";
 		}
 		
 		cargoService.salvar(cargo);
@@ -78,7 +78,7 @@ public class CargoController {
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		Cargo objDepto = cargoService.buscarPorId(id);
 		model.addAttribute("cargo", objDepto);
-		return "/cargo/cadastro";
+		return "cargo/cadastro";
 	}
 
 	//aula 46
@@ -90,7 +90,7 @@ public class CargoController {
 		// implementado na aula 57
 		// caso encontre erros na validação dos campos
 		if (result.hasErrors()) {
-			return "/cargo/cadastro";
+			return "cargo/cadastro";
 		}
 		cargoService.editar(cargo);
 		attr.addFlashAttribute("variavelSuccessDoControllerParaFrontend", "Cargo editado com sucesso!");

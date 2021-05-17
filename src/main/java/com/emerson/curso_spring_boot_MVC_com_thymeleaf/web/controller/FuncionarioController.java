@@ -54,7 +54,7 @@ public class FuncionarioController {
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Funcionario funcionario) {
-		return "/funcionario/cadastro";
+		return "funcionario/cadastro";
 	}
 
 	@GetMapping("/listar")
@@ -63,7 +63,7 @@ public class FuncionarioController {
 		// aula 51
 		List<Funcionario> lista = funcionarioService.buscarTodos();
 		model.addAttribute("funcionariosVariavelController", lista);
-		return "/funcionario/lista";
+		return "funcionario/lista";
 	}
 
 	// aula 49
@@ -71,7 +71,7 @@ public class FuncionarioController {
 	public String salvar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attr) {
 		
 		if(result.hasErrors()) {
-			return "/funcionario/cadastro";
+			return "funcionario/cadastro";
 		}
 		
 		funcionarioService.salvar(funcionario);
@@ -105,7 +105,7 @@ public class FuncionarioController {
 	public String editar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attr) {
 		
 		if(result.hasErrors()) {
-			return "/funcionario/cadastro";
+			return "funcionario/cadastro";
 		}
 		
 		funcionarioService.editar(funcionario);
@@ -137,7 +137,7 @@ public class FuncionarioController {
 		// em testes, tentei colocar uma váriavel diferente
 		// e a consulta por nome não estava retornando registros
 		model.addAttribute("funcionariosVariavelController", obj);
-		return "/funcionario/lista";
+		return "funcionario/lista";
 	}
 
 	// aula 54
@@ -145,7 +145,7 @@ public class FuncionarioController {
 	public String getPorCargo(@RequestParam("id") Long id, ModelMap model) {
 		List<Funcionario> obj = funcionarioService.buscarPorCargo(id);
 		model.addAttribute("funcionariosVariavelController", obj);
-		return "/funcionario/lista";
+		return "funcionario/lista";
 	}
 
 	// aula 55
@@ -157,6 +157,6 @@ public class FuncionarioController {
 							  ModelMap model) {
 		List<Funcionario> obj = funcionarioService.buscarPorDatas(entrada, saida);
 		model.addAttribute("funcionariosVariavelController", obj);
-		return "/funcionario/lista";
+		return "funcionario/lista";
 	}
 }

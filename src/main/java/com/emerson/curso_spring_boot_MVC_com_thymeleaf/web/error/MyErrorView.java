@@ -15,8 +15,9 @@ public class MyErrorView implements ErrorViewResolver {
 
 	@Override
 	public ModelAndView resolveErrorView(HttpServletRequest request, HttpStatus status, Map<String, Object> map) {
-
-		ModelAndView model = new ModelAndView("/error");
+		
+		// correção de bug na aula 69 - retirado a barra "/" do parametro "/error"
+		ModelAndView model = new ModelAndView("error");
 
 		// recupera o status referente ao erro e adiciona na variavel model
 		model.addObject("status", status.value());

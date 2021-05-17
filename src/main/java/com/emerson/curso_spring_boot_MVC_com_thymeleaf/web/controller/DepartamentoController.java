@@ -29,7 +29,7 @@ public class DepartamentoController {
 	// endpoint para pagina de cadastro de departamentos
 	@GetMapping("/cadastrar")
 	public String cadastrar(Departamento departamentoo) {
-		return "/departamento/cadastro";
+		return "departamento/cadastro";
 	}
 
 	@GetMapping("/listar")
@@ -42,7 +42,7 @@ public class DepartamentoController {
 		// presenta no documento HTML de listar os departamentos
 		model.addAttribute("departamentosVariavelController", lista);
 
-		return "/departamento/lista";
+		return "departamento/lista";
 	}
 
 	// aula 36
@@ -54,7 +54,7 @@ public class DepartamentoController {
 		// implementado na aula 57
 		// caso encontre erros na validação dos campos
 		if (result.hasErrors()) {
-			return "/departamento/cadastro";
+			return "departamento/cadastro";
 		}
 		
 		service.salvar(departamento);
@@ -72,7 +72,7 @@ public class DepartamentoController {
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		Departamento objDepto = service.buscarPorId(id);
 		model.addAttribute("departamento", objDepto);
-		return "/departamento/cadastro";
+		return "departamento/cadastro";
 	}
 
 	// aula 38
@@ -84,7 +84,7 @@ public class DepartamentoController {
 		// implementado na aula 57
 		// caso encontre erros na validação dos campos
 		if (result.hasErrors()) {
-			return "/departamento/cadastro";
+			return "departamento/cadastro";
 		}
 		
 		service.editar(departamento);
