@@ -6,8 +6,8 @@
 <body>
 	<nav class="sidebar sidebar-open" th:fragment="nav-sidebar">
 		<ul class="nav nav-pills">
-			<li class="nav-item"><a class="nav-link " href="/"> <i
-					class="oi oi-home"></i> 
+			<li class="nav-item"><a class="nav-link " th:href="@{/}"> 
+			<i class="oi oi-home"></i> 
 					<!-- aula 63 - ensinado a dar nomes aos componentes através do
 					arquivo messages.properties. Uma forma de centralizar
 					as informações da view -->
@@ -21,14 +21,14 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link"
-					href="/departamentos/cadastrar"> 
+					th:href="@{/departamentos/cadastrar}"> 
 					<i class="oi oi-plus"></i> 
 					<span th:text="#{sidebar.link.cadastrar}">Cadastrar</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link"
-				href="/departamentos/listar"> 
+				th:href="@{/departamentos/listar}"> 
 					<i class="oi oi-spreadsheet"></i>
 					<span th:text="#{sidebar.link.listar}">Listar </span>
 				</a>
@@ -39,13 +39,14 @@
 			<li class="nav-item">
 				<span class="nav-link active" th:text="#{sidebar.titulo.cargo}">Cargos</span>
 			</li>
-			<li class="nav-item"><a class="nav-link"
-				href="/cargos/cadastrar"> <i class="oi oi-plus">
-				</i> 
-				<span th:text="#{sidebar.link.cadastrar}">>Cadastrar </span>
-			</a></li>
 			<li class="nav-item">
-				<a class="nav-link" href="/cargos/listar">
+				<a class="nav-link"
+					th:href="@{/cargos/cadastrar}"> <i class="oi oi-plus">
+					</i> 
+					<span th:text="#{sidebar.link.cadastrar}">>Cadastrar </span>
+				</a></li>
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/cargos/listar}">
 				<i class="oi oi-spreadsheet"></i> 
 				<span th:text="#{sidebar.link.listar}">Listar </span>
 				</a>
@@ -57,13 +58,14 @@
 				<span class="nav-link active" th:text="#{sidebar.titulo.funcionario}">Funcionários</span>
 			</li>
 			<li class="nav-item"><a class="nav-link"
-				href="/funcionarios/cadastrar"> <i class="oi oi-plus"></i> 
+				th:href="@{/funcionarios/cadastrar}"> 
+				<i class="oi oi-plus"></i> 
 				<span th:text="#{sidebar.link.cadastrar}">>Cadastrar</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link"
-				href="/funcionarios/listar"> 
+				th:href="@{/funcionarios/listar}"> 
 				<i class="oi oi-spreadsheet"></i> 
 				<span th:text="#{sidebar.link.listar}">>Listar</span>
 			</a></li>
