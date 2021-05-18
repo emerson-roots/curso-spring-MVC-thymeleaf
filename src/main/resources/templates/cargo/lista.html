@@ -60,13 +60,16 @@
 	                https://getbootstrap.com/docs/5.0/components/pagination/ -->
 	                <nav aria-label="Page navigation example">
 						  <ul class="pagination justify-content-center">
-						    <li class="page-item">
+						  	<!-- aula 84 - desabilita os botoes de paginação Previous/Next de acordo com a pagina -->
+						    <li th:class="${cargosPaginadosVariavelController.pagina == 1} ? 'page-item disabled' : 'page-item'">
 						      <a class="page-link" th:href="@{/cargos/listar(page=${cargosPaginadosVariavelController.pagina - 1})}" tabindex="-1" aria-disabled="true">Prev</a>
 						    </li>
-						    <li class="page-item"><a class="page-link" href="#">1</a></li>
-						    <li class="page-item"><a class="page-link" href="#">2</a></li>
-						    <li class="page-item"><a class="page-link" href="#">3</a></li>
 						    <li class="page-item">
+						    <!-- aula 84 - insere o numero da pagina e a quantidade total -->
+						    <span class="page-link" th:text="|${cargosPaginadosVariavelController.pagina} de ${cargosPaginadosVariavelController.totalDePaginas}|"></span>
+						    </li>
+						    <!-- aula 84 - desabilita os botoes de paginação Previous/Next de acordo com a pagina -->
+						    <li th:class="${cargosPaginadosVariavelController.pagina == cargosPaginadosVariavelController.totalDePaginas} ? 'page-item disabled' : 'page-item'">
 						      <a class="page-link" th:href="@{/cargos/listar(page=${cargosPaginadosVariavelController.pagina + 1})}">Next</a>
 						    </li>
 						  </ul>
