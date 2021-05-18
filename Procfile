@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -Dspring.profiles.active=prod -jar target/curso_spring_boot_MVC_com_thymeleaf-0.0.1-SNAPSHOT.jar

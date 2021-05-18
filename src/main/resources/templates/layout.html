@@ -64,7 +64,12 @@
 			//pega o atributo de botões com id que começam com "btn_"
 			//e divide a string em partes quebrando a partir do caractere "_"
 			//e concatena o index 1 a URL base localhost
-			url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
+			//
+			//_____________________________________________________________
+			//
+			//na aula 74 foi modificado a url base "http://localhost:8080/" para apenas "/"
+			//para rodar a aplicação no heroku
+			url = "/" + $(this).attr('id').split("_")[1];
 		});
 
 		//após receber a URL da janela modal, monitora cliques de botao de confirma da janela MODAL
