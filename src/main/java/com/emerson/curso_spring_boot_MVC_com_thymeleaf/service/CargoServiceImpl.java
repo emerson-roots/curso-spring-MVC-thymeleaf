@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.dao.CargoDao;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Cargo;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.util.PaginacaoUtil;
 
 //aula 25
 //o atributo readOnly possui como padrao o valor FALSE e nao serie necessário colocar neste caso
@@ -56,6 +57,12 @@ public class CargoServiceImpl implements CargoService {
 			return false;
 		}
 		return true;
+	}
+
+	//aula 82
+	@Override
+	public PaginacaoUtil<Cargo> buscaPorPagina(int pagina) {
+		return dao.buscaPaginada(pagina);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.emerson.curso_spring_boot_MVC_com_thymeleaf.service;
 import java.util.List;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Cargo;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.util.PaginacaoUtil;
 
 public interface CargoService {
 
@@ -18,4 +19,7 @@ public interface CargoService {
 	
 	//aula 47
 	boolean cargoTemFuncionarios(Long id);
+	
+	//aula 82
+	PaginacaoUtil<Cargo> buscaPorPagina(int pagina);
 }
