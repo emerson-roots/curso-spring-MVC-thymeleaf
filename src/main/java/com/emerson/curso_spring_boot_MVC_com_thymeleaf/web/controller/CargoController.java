@@ -1,6 +1,7 @@
 package com.emerson.curso_spring_boot_MVC_com_thymeleaf.web.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -13,12 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Cargo;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Departamento;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.service.CargoService;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.service.DepartamentoService;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.util.PaginacaoUtil;
 
 //aula 12
 @Controller
@@ -35,16 +38,19 @@ public class CargoController {
 	public String cadastrar(Cargo cargo) {
 		return "cargo/cadastro";
 	}
-
+	
+	//metodo modificado na aula 82
 	@GetMapping("/listar")
-	public String listar(ModelMap model) {
+	public String listar(ModelMap model, @RequestParam("page") Optional<Integer> page) {
 		
-		List<Cargo> lista = cargoService.buscarTodos();
-
+		int paginaAtual = page.orElse(1);
+		
+		PaginacaoUtil<Cargo> pageCargo = cargoService.buscaPorPagina(paginaAtual);
+ 		
 		// adiciona uma lista de objetos a váriavel definida no frontend HTML
 		// cargosVariavelController é exatamente a váriavel
 		// presenta no documento HTML de listar os cargos
-		model.addAttribute("cargosVariavelController", lista);
+		model.addAttribute("cargosPaginadosVariavelController", pageCargo);
 		return "cargo/lista";
 	}
 

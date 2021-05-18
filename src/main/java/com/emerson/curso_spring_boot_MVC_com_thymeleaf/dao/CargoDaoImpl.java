@@ -39,7 +39,7 @@ public class CargoDaoImpl extends AbstractDao<Cargo, Long> implements CargoDao {
 	// aula 82
 	// retorna a quantidade de registros na tabela
 	public long count() {
-		return getEntityManager().createNamedQuery("select count(*) from Cargo", Long.class)
+		return getEntityManager().createQuery("select count(*) from Cargo", Long.class)
 				.getSingleResult();
 	}
 }
