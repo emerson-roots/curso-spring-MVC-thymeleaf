@@ -61,8 +61,8 @@ public class CargoServiceImpl implements CargoService {
 
 	//aula 82
 	@Override
-	public PaginacaoUtil<Cargo> buscaPorPagina(int pagina) {
-		return dao.buscaPaginada(pagina);
+	public PaginacaoUtil<Cargo> buscaPorPagina(int pagina, String direcaoOrdenacao) {
+		return dao.buscaPaginada(pagina, direcaoOrdenacao);
 	}
 
 }

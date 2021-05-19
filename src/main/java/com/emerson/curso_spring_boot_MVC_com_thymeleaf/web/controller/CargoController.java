@@ -40,12 +40,17 @@ public class CargoController {
 	}
 	
 	//metodo modificado na aula 82
+	//
+	//modificado novamente na aula 86 onde foi incluido a direcao de ordenacao
 	@GetMapping("/listar")
-	public String listar(ModelMap model, @RequestParam("page") Optional<Integer> page) {
+	public String listar(ModelMap model, 
+			@RequestParam("page") Optional<Integer> page,
+			@RequestParam("direcaoOrdenacao") Optional<String> direcaoOrdenacao) {
 		
 		int paginaAtual = page.orElse(1);
+		String ordem = direcaoOrdenacao.orElse("ASC");
 		
-		PaginacaoUtil<Cargo> pageCargo = cargoService.buscaPorPagina(paginaAtual);
+		PaginacaoUtil<Cargo> pageCargo = cargoService.buscaPorPagina(paginaAtual, ordem);
  		
 		// adiciona uma lista de objetos a váriavel definida no frontend HTML
 		// cargosVariavelController é exatamente a váriavel

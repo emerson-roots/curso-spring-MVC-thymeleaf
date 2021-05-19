@@ -12,7 +12,7 @@ import com.emerson.curso_spring_boot_MVC_com_thymeleaf.util.PaginacaoUtil;
 public class CargoDaoImpl extends AbstractDao<Cargo, Long> implements CargoDao {
 
 	// aula 81
-	public PaginacaoUtil<Cargo> buscaPaginada(int pagina) {
+	public PaginacaoUtil<Cargo> buscaPaginada(int pagina, String direcaoOrdenacao) {
 
 		// define a quantidade de registros por paginas
 		int tamanhoRegistrosPorPagina = 5;
@@ -24,7 +24,7 @@ public class CargoDaoImpl extends AbstractDao<Cargo, Long> implements CargoDao {
 		int inicio = (pagina - 1) * tamanhoRegistrosPorPagina;
 
 		List<Cargo> cargos = getEntityManager()
-				.createQuery("select c from Cargo c order by c.nome asc", Cargo.class)
+				.createQuery("select c from Cargo c order by c.nome " + direcaoOrdenacao, Cargo.class)
 				.setFirstResult(inicio)
 				.setMaxResults(tamanhoRegistrosPorPagina)
 				.getResultList();
@@ -33,7 +33,7 @@ public class CargoDaoImpl extends AbstractDao<Cargo, Long> implements CargoDao {
 		long qtdRegistrosNaTabela = count();
 		long totalDePaginas = (qtdRegistrosNaTabela + (tamanhoRegistrosPorPagina - 1)) / tamanhoRegistrosPorPagina;
 		
-		return new PaginacaoUtil<>(tamanhoRegistrosPorPagina, pagina, totalDePaginas, cargos);
+		return new PaginacaoUtil<>(tamanhoRegistrosPorPagina, pagina, totalDePaginas, cargos, direcaoOrdenacao);
 	}
 	
 	// aula 82
@@ -42,4 +42,5 @@ public class CargoDaoImpl extends AbstractDao<Cargo, Long> implements CargoDao {
 		return getEntityManager().createQuery("select count(*) from Cargo", Long.class)
 				.getSingleResult();
 	}
+
 }

@@ -21,5 +21,5 @@ public interface CargoService {
 	boolean cargoTemFuncionarios(Long id);
 	
 	//aula 82
-	PaginacaoUtil<Cargo> buscaPorPagina(int pagina);
+	PaginacaoUtil<Cargo> buscaPorPagina(int pagina, String direcaoOrdenacao);
 }

@@ -32,7 +32,16 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>Cargo</th>
+							<!-- aula 86 - implementado a ordenacao da coluna CARGO de forma ascendente ou descendente -->
+							<th>
+								<a th:href="@{/cargos/listar(page=${cargosPaginadosVariavelController.pagina}, direcaoOrdenacao=asc)}" tabindex="-1" aria-disabled="true">
+									<span class="oi oi-arrow-circle-bottom" data-toggle="tooltip" data-placement="top" title="Classifica em ordem Ascendente (A - Z)"></span>
+								</a>
+									Cargo
+								<a th:href="@{/cargos/listar(page=${cargosPaginadosVariavelController.pagina}, direcaoOrdenacao=desc)}" tabindex="-1" aria-disabled="true">
+									<span class="oi oi-arrow-circle-top" data-toggle="tooltip" data-placement="top" title="Classifica em ordem Descendente (Z - A)"></span>
+								</a>
+							</th>
 							<th>Departamento</th>
 							<th>Ação</th>
 						</tr>
@@ -62,11 +71,11 @@
 						  <ul class="pagination justify-content-center">
 						  	
 						  	<li class="page-item">
-						      <a class="page-link" th:href="@{/cargos/listar(page=${1})}" tabindex="-1" aria-disabled="true">Primeira Página</a>
+						      <a class="page-link" th:href="@{/cargos/listar(page=${1}, direcaoOrdenacao=${cargosPaginadosVariavelController.direcaoOrdenacao})}" tabindex="-1" aria-disabled="true">Primeira</a>
 						    </li>
 						  	<!-- aula 84 - desabilita os botoes de paginação Previous/Next de acordo com a pagina -->
 						    <li th:class="${cargosPaginadosVariavelController.pagina == 1} ? 'page-item disabled' : 'page-item'">
-						      <a class="page-link" th:href="@{/cargos/listar(page=${cargosPaginadosVariavelController.pagina - 1})}" tabindex="-1" aria-disabled="true">Prev</a>
+						      <a class="page-link" th:href="@{/cargos/listar(page=${cargosPaginadosVariavelController.pagina - 1}, direcaoOrdenacao=${cargosPaginadosVariavelController.direcaoOrdenacao})}" tabindex="-1" aria-disabled="true">Anterior</a>
 						    </li>
 						    <li class="page-item">
 						    <!-- aula 84 - insere o numero da pagina e a quantidade total -->
@@ -74,10 +83,10 @@
 						    </li>
 						    <!-- aula 84 - desabilita os botoes de paginação Previous/Next de acordo com a pagina -->
 						    <li th:class="${cargosPaginadosVariavelController.pagina == cargosPaginadosVariavelController.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-						      <a class="page-link" th:href="@{/cargos/listar(page=${cargosPaginadosVariavelController.pagina + 1})}">Next</a>
+						      <a class="page-link" th:href="@{/cargos/listar(page=${cargosPaginadosVariavelController.pagina + 1}, direcaoOrdenacao=${cargosPaginadosVariavelController.direcaoOrdenacao})}">Próxima</a>
 						    </li>
 						    <li class="page-item">
-						      <a class="page-link" th:href="@{/cargos/listar(page=${cargosPaginadosVariavelController.totalDePaginas})}" tabindex="-1" aria-disabled="true">Última Página</a>
+						      <a class="page-link" th:href="@{/cargos/listar(page=${cargosPaginadosVariavelController.totalDePaginas}, direcaoOrdenacao=${cargosPaginadosVariavelController.direcaoOrdenacao})}" tabindex="-1" aria-disabled="true">Última</a>
 						    </li>
 						  </ul>
 					</nav>

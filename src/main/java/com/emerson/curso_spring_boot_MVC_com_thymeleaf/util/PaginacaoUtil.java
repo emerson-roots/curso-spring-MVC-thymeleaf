@@ -16,13 +16,19 @@ public class PaginacaoUtil<T> {
 
 	// recebe o resultado da consulta no banco de dados
 	private List<T> registros;
+	
+	// aula 86
+	private String direcaoOrdenacao;
 
-	public PaginacaoUtil(int tamanho, int pagina, long totalDePaginas, List<T> registros) {
+	
+	// aula 86 - construtor criado com o parametro de direcaoOrdenacao para classificar paginas
+	public PaginacaoUtil(int tamanho, int pagina, long totalDePaginas, List<T> registros, String direcaoOrdenacao) {
 		super();
 		this.tamanho = tamanho;
 		this.pagina = pagina;
 		this.totalDePaginas = totalDePaginas;
 		this.registros = registros;
+		this.direcaoOrdenacao = direcaoOrdenacao;
 	}
 
 	// não é necessário os metodos setters pois ja possui o constructor
@@ -41,5 +47,9 @@ public class PaginacaoUtil<T> {
 	public List<T> getRegistros() {
 		return registros;
 	}
-
+	
+	// aula 86
+	public String getDirecaoOrdenacao() {
+		return direcaoOrdenacao;
+	}
 }
