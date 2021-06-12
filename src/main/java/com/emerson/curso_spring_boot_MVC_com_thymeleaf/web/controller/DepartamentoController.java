@@ -1,18 +1,23 @@
 package com.emerson.curso_spring_boot_MVC_com_thymeleaf.web.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Departamento;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.service.DepartamentoService;
@@ -115,5 +120,27 @@ public class DepartamentoController {
 		// de redirecionar para outra pagina do projeto
 		// chamando apenas o metodo
 		return listar(model);
+	}
+	
+	/**
+	 * ===============================================================================================
+	 * 
+	 * 							M I G R A Ç Ã O     A N G U L A R
+	 * 
+	 * metodos criados para adaptação do front-end para trabalhar com Angular
+	 * 
+	 * 
+	 * ===============================================================================================
+	 */
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@RequestBody Departamento departamento) {
+
+		service.salvar(departamento);
+		// URI do java.net
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(departamento.getId()).toUri();
+
+		return ResponseEntity.created(uri).build();
+
 	}
 }
