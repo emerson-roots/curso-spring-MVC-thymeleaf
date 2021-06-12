@@ -143,4 +143,11 @@ public class DepartamentoController {
 		return ResponseEntity.created(uri).build();
 
 	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Departamento>> findAll() {
+
+		return ResponseEntity.ok().body(service.buscarTodos());
+
+	}
 }

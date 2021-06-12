@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "DEPARTAMENTOS")
@@ -19,7 +21,8 @@ public class Departamento extends AbstractEntity<Long> {
 	@Size(min = 3, max = 60, message = "O nome do departamento de ter entre {min} e {max} caracteres.")
 	@Column(name = "nome", nullable = false, unique = true, length = 60)
 	private String nome;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "departamento")
 	private List<Cargo> cargos;
 
