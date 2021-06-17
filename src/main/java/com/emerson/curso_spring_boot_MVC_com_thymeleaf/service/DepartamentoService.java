@@ -18,5 +18,10 @@ public interface DepartamentoService {
 	
 	//aula 39, verifica se departamento contém cargos antes de excluir
 	boolean departamentoTemCargos(Long id);
+	
+	// =================================================
+	// metodos usados para angular
+	// =================================================
+	void delete(Long id);
 
 }
