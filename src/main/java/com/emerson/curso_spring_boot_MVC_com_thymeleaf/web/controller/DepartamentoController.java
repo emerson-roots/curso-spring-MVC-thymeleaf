@@ -150,4 +150,17 @@ public class DepartamentoController {
 		return ResponseEntity.ok().body(service.buscarTodos());
 
 	}
+	
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+            service.delete(id);
+            return ResponseEntity.noContent().build();
+
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Departamento> findById(@PathVariable Long id) {
+            Departamento obj = service.buscarPorId(id);
+            return ResponseEntity.ok().body(obj);
+    }
 }
