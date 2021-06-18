@@ -163,4 +163,10 @@ public class DepartamentoController {
             Departamento obj = service.buscarPorId(id);
             return ResponseEntity.ok().body(obj);
     }
+    
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody Departamento obj, @PathVariable Long id) {
+		service.editar(obj);
+		return ResponseEntity.noContent().build();
+	}
 }
