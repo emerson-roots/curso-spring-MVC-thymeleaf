@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.DataIntegrityExceptionPersonalized;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.ObjectNotFoundExceptionPersonalized;
 
 @ControllerAdvice
 public class ResourceExceptionHandlerPersonalized {
@@ -35,6 +36,15 @@ public class ResourceExceptionHandlerPersonalized {
 		StandardErrorPersonalized err = new StandardErrorPersonalized(System.currentTimeMillis(),
 				HttpStatus.BAD_REQUEST.value(), "Integridade de dados", e.getMessage(), pRequest.getRequestURI());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
+	@ExceptionHandler(ObjectNotFoundExceptionPersonalized.class)
+	public ResponseEntity<StandardErrorPersonalized> objectNotFoundEmerson(ObjectNotFoundExceptionPersonalized pNotFound,
+			HttpServletRequest pRequest) {
+
+		StandardErrorPersonalized err = new StandardErrorPersonalized(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(),
+				"Objeto não encontrado", pNotFound.getMessage(), pRequest.getRequestURI());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
 
 }

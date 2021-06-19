@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.repositories.DepartamentoAngularRepository;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Departamento;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.DataIntegrityExceptionPersonalized;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.ObjectNotFoundExceptionPersonalized;
 
 @Service
 public class DepartamentoAngularService {
@@ -22,14 +23,23 @@ public class DepartamentoAngularService {
 
 		Optional<Departamento> obj = repo.findById(pId);
 
-		return obj.orElseThrow(() -> null);//-> new ObjectNotFoundExceptionPersonalized("Objeto não encontrado! Id: " + pId + ", Tipo: " + Departamento.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundExceptionPersonalized("Objeto não encontrado! Id: " +pId + ", Tipo: " + Departamento.class.getName()));
 	}
 
 	@Transactional
 	public Departamento insert(Departamento obj) {
 		obj.setId(null);
-		obj = repo.save(obj);
-		return obj;
+
+		Departamento objByNome = repo.findByNome(obj.getNome());
+
+		// verifica se ja existe um objeto cadastrado com o mesmo nome
+		if (objByNome == null) {
+			obj = repo.save(obj);
+			return obj;
+		} else {
+			throw new DataIntegrityExceptionPersonalized(
+					"Já existe um departamento '" + objByNome.getNome() + "' cadastrado.");
+		}
 	}
 
 	public Departamento update(Departamento obj) {
