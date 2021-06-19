@@ -32,7 +32,6 @@ public class ResourceExceptionHandlerPersonalized {
 	@ExceptionHandler(DataIntegrityExceptionPersonalized.class)
 	public ResponseEntity<StandardErrorPersonalized> dataIntegrityPersonalized(DataIntegrityExceptionPersonalized e,
 			HttpServletRequest pRequest) {
-		System.out.println("passou aqui");
 		StandardErrorPersonalized err = new StandardErrorPersonalized(System.currentTimeMillis(),
 				HttpStatus.BAD_REQUEST.value(), "Integridade de dados", e.getMessage(), pRequest.getRequestURI());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
