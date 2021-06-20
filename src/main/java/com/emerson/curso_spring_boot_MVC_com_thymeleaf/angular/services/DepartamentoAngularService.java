@@ -44,8 +44,16 @@ public class DepartamentoAngularService {
 
 	public Departamento update(Departamento obj) {
 		Departamento newObj = find(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(newObj);
+		Departamento objByNome = repo.findByNome(obj.getNome());
+		
+		// verifica se ja existe um objeto cadastrado com o mesmo nome
+		if (objByNome == null) {
+			updateData(newObj, obj);
+			return repo.save(newObj);
+		} else {
+			throw new DataIntegrityExceptionPersonalized(
+					"Já existe um departamento '" + objByNome.getNome() + "' cadastrado.");
+		}
 	}
 
 	private void updateData(Departamento newObj, Departamento obj) {
