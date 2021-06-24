@@ -4,12 +4,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Departamento;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Cargo;
+
 
 @Repository
-public interface DepartamentoAngularRepository extends JpaRepository<Departamento, Long> {
+public interface CargoAngularRepository extends JpaRepository<Cargo, Long> {
 
 	@Transactional(readOnly = true)
-	Departamento findByNome(String nome);
+	Cargo findByNome(String nome);
 
 }

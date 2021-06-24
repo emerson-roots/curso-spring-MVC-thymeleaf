@@ -12,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "CARGOS")
@@ -29,6 +31,7 @@ public class Cargo extends AbstractEntity<Long> {
 	@JoinColumn(name = "id_departamento_fk")
 	private Departamento departamento;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "cargo")
 	private List<Funcionario> funcionarios;
 
