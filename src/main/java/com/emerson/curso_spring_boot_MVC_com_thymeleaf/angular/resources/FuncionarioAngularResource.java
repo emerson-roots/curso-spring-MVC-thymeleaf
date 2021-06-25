@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.services.CargoAngularService;
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Cargo;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.services.FuncionarioAngularService;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
 
 @RestController
-@RequestMapping(value = "/office")
-public class CargoAngularResource {
+@RequestMapping(value = "/employee")
+public class FuncionarioAngularResource {
 
 	@Autowired
-	private CargoAngularService service;
+	private FuncionarioAngularService service;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Cargo cargo) {
+	public ResponseEntity<Void> insert(@RequestBody Funcionario funcionario) {
 
-		service.insert(cargo);
+		service.insert(funcionario);
 		// URI do java.net
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cargo.getId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(funcionario.getId())
 				.toUri();
 
 		return ResponseEntity.created(uri).build();
@@ -37,7 +37,7 @@ public class CargoAngularResource {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Cargo>> findAll() {
+	public ResponseEntity<List<Funcionario>> findAll() {
 		return ResponseEntity.ok().body(service.findAll());
 	}
 
@@ -48,13 +48,13 @@ public class CargoAngularResource {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Cargo> findById(@PathVariable Long id) {
-		Cargo obj = service.find(id);
+	public ResponseEntity<Funcionario> findById(@PathVariable Long id) {
+		Funcionario obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody Cargo obj, @PathVariable Long id) {
+	public ResponseEntity<Void> update(@Valid @RequestBody Funcionario obj, @PathVariable Long id) {
 		service.update(obj);
 		return ResponseEntity.noContent().build();
 	}

@@ -21,7 +21,7 @@ public class Cargo extends AbstractEntity<Long> {
 	
 	//aula 57 - anotaçoes @NotBlank e @Size
 	@NotBlank(message="O nome do cargo é obrigatório.")
-	@Size(max = 60, message = "O nome do cargo conter no máximo {max} caracteres.")
+	@Size(min = 2, max = 60, message = "O nome do cargo conter entre {min} e {max} caracteres.")
 	@Column(name = "nome", nullable = false, unique = true, length = 60)
 	private String nome;
 	
