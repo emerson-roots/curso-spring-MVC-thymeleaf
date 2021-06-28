@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.services.FuncionarioAngularService;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.enums.UF;
 
 @RestController
 @RequestMapping(value = "/employee")
@@ -57,6 +58,11 @@ public class FuncionarioAngularResource {
 	public ResponseEntity<Void> update(@Valid @RequestBody Funcionario obj, @PathVariable Long id) {
 		service.update(obj);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "/ufs", method = RequestMethod.GET)
+	public ResponseEntity<UF[]> getUFs() {
+		return ResponseEntity.ok().body(UF.values());
 	}
 
 }
