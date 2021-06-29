@@ -21,6 +21,9 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.validation.FuncionarioInsert;
+
+@FuncionarioInsert
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "FUNCIONARIOS")

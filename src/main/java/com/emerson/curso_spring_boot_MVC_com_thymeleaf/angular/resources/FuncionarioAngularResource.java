@@ -26,7 +26,7 @@ public class FuncionarioAngularResource {
 	private FuncionarioAngularService service;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Funcionario funcionario) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody Funcionario funcionario) {
 
 		service.insert(funcionario);
 		// URI do java.net

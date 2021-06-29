@@ -31,16 +31,8 @@ public class FuncionarioAngularService {
 	public Funcionario insert(Funcionario obj) {
 		obj.setId(null);
 
-		Funcionario objByNome = repo.findByNome(obj.getNome());
-
-		// verifica se ja existe um objeto cadastrado com o mesmo nome
-		if (objByNome == null) {
-			obj = repo.save(obj);
-			return obj;
-		} else {
-			throw new DataIntegrityExceptionPersonalized(
-					"Já existe um Funcionario '" + objByNome.getNome() + "' cadastrado.");
-		}
+		obj = repo.save(obj);
+		return obj;
 	}
 
 	public Funcionario update(Funcionario obj) {
