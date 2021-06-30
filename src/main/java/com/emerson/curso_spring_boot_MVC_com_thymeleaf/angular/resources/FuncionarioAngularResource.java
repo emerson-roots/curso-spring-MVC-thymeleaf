@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.dto.FuncionarioNewDTO;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.services.FuncionarioAngularService;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.enums.UF;
@@ -26,11 +27,13 @@ public class FuncionarioAngularResource {
 	private FuncionarioAngularService service;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody Funcionario funcionario) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody FuncionarioNewDTO funcionario) {
 
-		service.insert(funcionario);
+		Funcionario newObj = service.fromDTO(funcionario);
+		
+		newObj = service.insert(newObj);
 		// URI do java.net
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(funcionario.getId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId())
 				.toUri();
 
 		return ResponseEntity.created(uri).build();

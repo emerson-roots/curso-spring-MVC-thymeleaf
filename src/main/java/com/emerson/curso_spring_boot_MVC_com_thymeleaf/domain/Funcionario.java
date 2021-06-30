@@ -21,13 +21,29 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.validation.FuncionarioInsert;
-
-@FuncionarioInsert
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "FUNCIONARIOS")
 public class Funcionario extends AbstractEntity<Long> {
+	
+	public Funcionario(String nome, 
+			BigDecimal salario,
+			LocalDate dataEntrada,
+			LocalDate dataSaida, 
+			Endereco endereco,
+			Cargo cargo) {
+		super();
+		this.nome = nome;
+		this.salario = salario;
+		this.dataEntrada = dataEntrada;
+		this.dataSaida = dataSaida;
+		this.endereco = endereco;
+		this.cargo = cargo;
+	}
+	
+	public Funcionario() {
+		
+	}
 	
 	@NotBlank
 	@Size(max = 255, min = 3)

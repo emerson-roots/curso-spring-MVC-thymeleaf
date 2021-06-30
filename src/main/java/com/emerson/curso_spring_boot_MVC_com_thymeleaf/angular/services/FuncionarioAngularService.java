@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.dto.FuncionarioNewDTO;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.repositories.FuncionarioAngularRepository;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.DataIntegrityExceptionPersonalized;
@@ -33,6 +34,18 @@ public class FuncionarioAngularService {
 
 		obj = repo.save(obj);
 		return obj;
+	}
+	
+	public Funcionario fromDTO(FuncionarioNewDTO objDto) {
+		
+		Funcionario funcionario = new Funcionario(objDto.getNome(),
+				objDto.getSalario(), 
+				objDto.getDataEntrada(), 
+				objDto.getDataSaida(), 
+				objDto.getEndereco(), 
+				objDto.getCargo());
+		
+		return funcionario;
 	}
 
 	public Funcionario update(Funcionario obj) {
