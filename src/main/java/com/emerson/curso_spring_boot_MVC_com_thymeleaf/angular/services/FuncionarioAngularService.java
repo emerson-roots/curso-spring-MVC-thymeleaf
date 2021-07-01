@@ -27,6 +27,11 @@ public class FuncionarioAngularService {
 		return obj.orElseThrow(() -> new ObjectNotFoundExceptionPersonalized(
 				"Objeto não encontrado! Id: " + pId + ", Tipo: " + Funcionario.class.getName()));
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Funcionario> findAllByName(String nome){
+		return repo.findByNomeIgnoreCaseContaining(nome);
+	}
 
 	@Transactional
 	public Funcionario insert(Funcionario obj) {

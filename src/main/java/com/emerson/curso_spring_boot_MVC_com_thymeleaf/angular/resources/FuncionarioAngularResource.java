@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -30,11 +31,10 @@ public class FuncionarioAngularResource {
 	public ResponseEntity<Void> insert(@Valid @RequestBody FuncionarioNewDTO funcionario) {
 
 		Funcionario newObj = service.fromDTO(funcionario);
-		
+
 		newObj = service.insert(newObj);
 		// URI do java.net
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId())
-				.toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 
 		return ResponseEntity.created(uri).build();
 
@@ -51,6 +51,15 @@ public class FuncionarioAngularResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@RequestMapping(value = "/search/name", method = RequestMethod.GET)
+	public ResponseEntity<List<Funcionario>> findAllByName(
+			@RequestParam(value = "nome", defaultValue = "") String nome) {
+
+		List<Funcionario> list = service.findAllByName(nome);
+		return ResponseEntity.ok().body(list);
+
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Funcionario> findById(@PathVariable Long id) {
 		Funcionario obj = service.find(id);
@@ -62,7 +71,7 @@ public class FuncionarioAngularResource {
 		service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/ufs", method = RequestMethod.GET)
 	public ResponseEntity<UF[]> getUFs() {
 		return ResponseEntity.ok().body(UF.values());
