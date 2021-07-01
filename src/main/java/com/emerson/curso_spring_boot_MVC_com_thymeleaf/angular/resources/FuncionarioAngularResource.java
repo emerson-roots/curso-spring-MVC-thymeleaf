@@ -60,6 +60,12 @@ public class FuncionarioAngularResource {
 
 	}
 
+	@RequestMapping(value = "/search/office", method = RequestMethod.GET)
+	public ResponseEntity<List<Funcionario>> findAllByCargo(@RequestParam(value = "id", defaultValue = "") Long id) {
+		List<Funcionario> list = service.findAllByCargo(id);
+		return ResponseEntity.ok().body(list);
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Funcionario> findById(@PathVariable Long id) {
 		Funcionario obj = service.find(id);

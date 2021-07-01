@@ -18,5 +18,8 @@ public interface FuncionarioAngularRepository extends JpaRepository<Funcionario,
 	
 	@Transactional(readOnly = true)
 	List<Funcionario> findByNomeIgnoreCaseContaining(@Param("nome") String nome);
+	
+	@Transactional(readOnly = true)
+	List<Funcionario> findByCargoId(@Param("id") Long id);
 
 }

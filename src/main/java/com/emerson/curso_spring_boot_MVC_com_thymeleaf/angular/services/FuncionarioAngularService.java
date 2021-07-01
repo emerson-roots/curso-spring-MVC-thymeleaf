@@ -32,6 +32,11 @@ public class FuncionarioAngularService {
 	public List<Funcionario> findAllByName(String nome){
 		return repo.findByNomeIgnoreCaseContaining(nome);
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Funcionario> findAllByCargo(Long id){
+		return repo.findByCargoId(id);
+	}
 
 	@Transactional
 	public Funcionario insert(Funcionario obj) {
