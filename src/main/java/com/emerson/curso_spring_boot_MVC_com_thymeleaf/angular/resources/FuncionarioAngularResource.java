@@ -1,11 +1,14 @@
 package com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.resources;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,6 +66,24 @@ public class FuncionarioAngularResource {
 	@RequestMapping(value = "/search/office", method = RequestMethod.GET)
 	public ResponseEntity<List<Funcionario>> findAllByCargo(@RequestParam(value = "id", defaultValue = "") Long id) {
 		List<Funcionario> list = service.findAllByCargo(id);
+		return ResponseEntity.ok().body(list);
+	}
+
+	@RequestMapping(value = "/search/date", method = RequestMethod.GET)
+	public ResponseEntity<List<Funcionario>> findAllByDataEntradaDataSaida(
+			@RequestParam(name = "dataEntrada", required = false, defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataEntrada,
+			@RequestParam(name = "dataSaida", required = false, defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataSaida) {
+
+		List<Funcionario> list = new ArrayList<>();
+		
+		if (dataEntrada != null && dataSaida != null) {
+			list = service.findAllByDataEntradaAndDataSaida(dataEntrada, dataSaida);
+		} else if (dataEntrada != null) {
+			list = service.findAllByDataEntrada(dataEntrada);
+		} else if (dataSaida != null) {
+			list = service.findAllByDataSaida(dataSaida);
+		}
+
 		return ResponseEntity.ok().body(list);
 	}
 

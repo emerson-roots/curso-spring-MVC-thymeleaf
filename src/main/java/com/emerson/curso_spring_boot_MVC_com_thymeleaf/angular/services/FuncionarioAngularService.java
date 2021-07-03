@@ -1,5 +1,6 @@
 package com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,21 @@ public class FuncionarioAngularService {
 	@Transactional(readOnly = true)
 	public List<Funcionario> findAllByCargo(Long id){
 		return repo.findByCargoId(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Funcionario> findAllByDataEntradaAndDataSaida(LocalDate dataEntrada, LocalDate dataSaida){
+		return repo.findByDataEntradaBetween(dataEntrada, dataSaida);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Funcionario> findAllByDataEntrada(LocalDate dataEntrada){
+		return repo.findByDataEntrada(dataEntrada);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Funcionario> findAllByDataSaida(LocalDate dataSaida){
+		return repo.findByDataSaida(dataSaida);
 	}
 
 	@Transactional
