@@ -26,13 +26,15 @@ import org.springframework.format.annotation.NumberFormat.Style;
 @Table(name = "FUNCIONARIOS")
 public class Funcionario extends AbstractEntity<Long> {
 	
-	public Funcionario(String nome, 
+	public Funcionario(Long id,
+			String nome, 
 			BigDecimal salario,
 			LocalDate dataEntrada,
 			LocalDate dataSaida, 
 			Endereco endereco,
 			Cargo cargo) {
 		super();
+		this.setId(id);
 		this.nome = nome;
 		this.salario = salario;
 		this.dataEntrada = dataEntrada;

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.dto.FuncionarioNewDTO;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.dto.FuncionarioDTO;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.services.FuncionarioAngularService;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.enums.UF;
@@ -31,9 +31,9 @@ public class FuncionarioAngularResource {
 	private FuncionarioAngularService service;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody FuncionarioNewDTO funcionario) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody FuncionarioDTO funcionarioDTO) {
 
-		Funcionario newObj = service.fromDTO(funcionario);
+		Funcionario newObj = service.fromDTO(funcionarioDTO);
 
 		newObj = service.insert(newObj);
 		// URI do java.net
@@ -94,8 +94,9 @@ public class FuncionarioAngularResource {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody Funcionario obj, @PathVariable Long id) {
-		service.update(obj);
+	public ResponseEntity<Void> update(@Valid @RequestBody FuncionarioDTO funcionarioDTO, @PathVariable Long id) {
+		Funcionario funcUpdate = service.fromDTO(funcionarioDTO);
+		service.update(funcUpdate);
 		return ResponseEntity.noContent().build();
 	}
 

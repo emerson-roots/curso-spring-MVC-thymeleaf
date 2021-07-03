@@ -2,33 +2,49 @@ package com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.validation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.HandlerMapping;
 
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.dto.FuncionarioNewDTO;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.dto.FuncionarioDTO;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.repositories.FuncionarioAngularRepository;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.resources.FieldMessagePersonalized;
 
-public class FuncionarioInsertValidator implements ConstraintValidator<FuncionarioInsert, FuncionarioNewDTO> {
+public class FuncionarioInsertOrUpdateValidator implements ConstraintValidator<FuncionarioInsertOrUpdate, FuncionarioDTO> {
 
 	@Autowired
 	private FuncionarioAngularRepository repo;
+	
+	@Autowired
+	private HttpServletRequest request;
 
 	@Override
-	public void initialize(FuncionarioInsert ann) {
+	public void initialize(FuncionarioInsertOrUpdate ann) {
 	}
 
 	@Override
-	public boolean isValid(FuncionarioNewDTO objDTO, ConstraintValidatorContext context) {
+	public boolean isValid(FuncionarioDTO objDTO, ConstraintValidatorContext context) {
 		List<FieldMessagePersonalized> list = new ArrayList<>();
 		
 		Funcionario aux = repo.findByNome(objDTO.getNome());
 		
-		if (aux != null) {
+		//responsável por captar parametros recebidos pela URI
+		@SuppressWarnings("unchecked")
+		Map<String,String> map = (Map<String,String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+		Long uriId = null;
+		
+		// se não vier parametro na URL gera erro
+		if(!map.isEmpty()) {
+			uriId = Long.parseLong(map.get("id"));
+		}
+		
+		if (aux != null && !aux.getId().equals(uriId)) {
 			list.add(new FieldMessagePersonalized("nome","Já existe um funcionario com nome '" + objDTO.getNome() + "' cadastrado."));
 		}
 		

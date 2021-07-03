@@ -4,37 +4,49 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.validation.FuncionarioInsert;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.validation.FuncionarioInsertOrUpdate;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Cargo;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Endereco;
 
-@FuncionarioInsert
-public class FuncionarioNewDTO implements Serializable {
+@FuncionarioInsertOrUpdate
+public class FuncionarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private Long id;
+
 	@NotBlank(message = "Preenchimento obrigatório")
-	@Size(max = 255, min = 3)
 	private String nome;
-	
+
 	@NotNull(message = "Preenchimento obrigatório")
+	@DecimalMin(value = "1", inclusive = false, message = "O salário deve ser MAIOR que {value}")
+	@DecimalMax(value = "99999", inclusive = false, message = "O salário deve MENOR que {value}")
 	private BigDecimal salario;
 
 	@NotNull(message = "Preenchimento obrigatório")
 	private LocalDate dataEntrada;
-	
+
 	private LocalDate dataSaida;
-	
+
 	@NotNull(message = "Preenchimento obrigatório")
 	private Endereco endereco;
-	
+
 	@NotNull(message = "{NotNull.funcionario.cargo}")
 	private Cargo cargo;
 
-	public FuncionarioNewDTO() {
+	public FuncionarioDTO() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {

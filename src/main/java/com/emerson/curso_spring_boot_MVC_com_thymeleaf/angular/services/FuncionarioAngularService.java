@@ -9,7 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.dto.FuncionarioNewDTO;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.dto.FuncionarioDTO;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.repositories.FuncionarioAngularRepository;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.DataIntegrityExceptionPersonalized;
@@ -62,9 +62,11 @@ public class FuncionarioAngularService {
 		return obj;
 	}
 	
-	public Funcionario fromDTO(FuncionarioNewDTO objDto) {
+	public Funcionario fromDTO(FuncionarioDTO objDto) {
 		
-		Funcionario funcionario = new Funcionario(objDto.getNome(),
+		Funcionario funcionario = new Funcionario(
+				objDto.getId(),
+				objDto.getNome(),
 				objDto.getSalario(), 
 				objDto.getDataEntrada(), 
 				objDto.getDataSaida(), 
@@ -74,18 +76,18 @@ public class FuncionarioAngularService {
 		return funcionario;
 	}
 
-	public Funcionario update(Funcionario obj) {
-		Funcionario newObj = find(obj.getId());
-		Funcionario objByNome = repo.findByNome(obj.getNome());
+	public Funcionario update(Funcionario funcionario) {
+		Funcionario newObj = find(funcionario.getId());
+//		Funcionario objByNome = repo.findByNome(obj.getNome());
 
 		// verifica se ja existe um objeto cadastrado com o mesmo nome
-		if (objByNome == null) {
-			updateData(newObj, obj);
+//		if (objByNome == null) {
+			updateData(newObj, funcionario);
 			return repo.save(newObj);
-		} else {
-			throw new DataIntegrityExceptionPersonalized(
-					"Já existe um Funcionario '" + objByNome.getNome() + "' cadastrado.");
-		}
+//		} else {
+//			throw new DataIntegrityExceptionPersonalized(
+//					"Já existe um Funcionario '" + objByNome.getNome() + "' cadastrado.");
+//		}
 	}
 
 	private void updateData(Funcionario newObj, Funcionario obj) {
