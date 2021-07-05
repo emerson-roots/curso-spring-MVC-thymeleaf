@@ -11,10 +11,10 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.services.DataIntegrityExceptionPersonalized;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.services.ObjectNotFoundExceptionPersonalized;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.repositories.CargoAngularRepository;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Cargo;
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.DataIntegrityExceptionPersonalized;
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.ObjectNotFoundExceptionPersonalized;
 
 @Service
 public class CargoAngularService {

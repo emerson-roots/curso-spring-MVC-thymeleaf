@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.dto.FuncionarioDTO;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.services.DataIntegrityExceptionPersonalized;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.services.ObjectNotFoundExceptionPersonalized;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.repositories.FuncionarioAngularRepository;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.DataIntegrityExceptionPersonalized;
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.ObjectNotFoundExceptionPersonalized;
 
 @Service
 public class FuncionarioAngularService {

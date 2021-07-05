@@ -1,4 +1,4 @@
-package com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services;
+package com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.services;
 
 
 public class DataIntegrityExceptionPersonalized extends RuntimeException {

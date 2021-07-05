@@ -1,4 +1,4 @@
-package com.emerson.curso_spring_boot_MVC_com_thymeleaf.filter;
+package com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.filter;
 
 import java.io.IOException;
 

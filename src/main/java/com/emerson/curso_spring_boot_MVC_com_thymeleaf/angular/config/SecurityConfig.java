@@ -1,4 +1,4 @@
-package com.emerson.curso_spring_boot_MVC_com_thymeleaf.config;
+package com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.config;
 
 import java.util.Arrays;
 

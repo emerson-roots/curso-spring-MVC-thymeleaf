@@ -1,4 +1,4 @@
-package com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.resources;
+package com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.resources;
 
 import java.util.ArrayList;
 import java.util.List;

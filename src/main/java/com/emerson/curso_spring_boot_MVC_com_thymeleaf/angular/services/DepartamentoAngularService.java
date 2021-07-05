@@ -8,10 +8,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.services.DataIntegrityExceptionPersonalized;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.services.ObjectNotFoundExceptionPersonalized;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.repositories.DepartamentoAngularRepository;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Departamento;
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.DataIntegrityExceptionPersonalized;
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.ObjectNotFoundExceptionPersonalized;
 
 @Service
 public class DepartamentoAngularService {

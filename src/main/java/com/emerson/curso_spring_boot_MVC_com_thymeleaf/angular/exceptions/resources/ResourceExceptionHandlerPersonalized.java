@@ -1,4 +1,4 @@
-package com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.resources;
+package com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.resources;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.DataIntegrityExceptionPersonalized;
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.services.ObjectNotFoundExceptionPersonalized;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.services.DataIntegrityExceptionPersonalized;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.services.ObjectNotFoundExceptionPersonalized;
 
 @ControllerAdvice
 public class ResourceExceptionHandlerPersonalized {

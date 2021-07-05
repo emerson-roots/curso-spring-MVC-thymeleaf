@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.dto.FuncionarioDTO;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.exceptions.resources.FieldMessagePersonalized;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.repositories.FuncionarioAngularRepository;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.domain.Funcionario;
-import com.emerson.curso_spring_boot_MVC_com_thymeleaf.exceptions.resources.FieldMessagePersonalized;
 
 public class FuncionarioInsertOrUpdateValidator implements ConstraintValidator<FuncionarioInsertOrUpdate, FuncionarioDTO> {
 
