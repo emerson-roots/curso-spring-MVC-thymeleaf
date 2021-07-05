@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,5 +76,13 @@ public class CargoAngularService {
 
 	public List<Cargo> findAll() {
 		return repo.findAll();
+	}
+	
+	public Page<Cargo> findPage(Integer pPage, Integer pLinesPerPage, String pOrderBy,
+			String pDirectionOrdenation) {
+		// PageRequest do Spring Data
+		PageRequest pageRequest = PageRequest.of(pPage, pLinesPerPage, Direction.valueOf(pDirectionOrdenation),
+				pOrderBy);
+		return repo.findAll(pageRequest);
 	}
 }

@@ -6,11 +6,13 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -57,6 +59,17 @@ public class CargoAngularResource {
 	public ResponseEntity<Void> update(@Valid @RequestBody Cargo obj, @PathVariable Long id) {
 		service.update(obj);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	public ResponseEntity<Page<Cargo>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer pPage,
+			@RequestParam(value = "linesPerPage", defaultValue = "5") Integer pLinesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String pOrderBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") String pDirectionOrdenation) {
+
+		Page<Cargo> list = service.findPage(pPage, pLinesPerPage, pOrderBy, pDirectionOrdenation);
+		return ResponseEntity.ok().body(list);
+
 	}
 
 }
