@@ -3,6 +3,7 @@ package com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.domain.Usuario;
@@ -15,6 +16,9 @@ public class UsuarioAngularService {
 
 	@Autowired
 	private UsuarioAngularRepository repo;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
@@ -32,7 +36,7 @@ public class UsuarioAngularService {
 
 	// sobrecarga do metodo só que agora recebendo um ClienteNewDTO
 	public Usuario fromDTO(UsuarioNewDTO objDto) {
-		Usuario user = new Usuario(null, objDto.getNome(), objDto.getEmail(), objDto.getSenha());
+		Usuario user = new Usuario(null, objDto.getNome(), objDto.getEmail(), passwordEncoder.encode(objDto.getSenha()));
 		return user;
 	}
 }

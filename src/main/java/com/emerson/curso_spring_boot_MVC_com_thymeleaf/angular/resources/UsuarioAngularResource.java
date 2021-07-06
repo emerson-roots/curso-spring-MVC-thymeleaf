@@ -30,7 +30,6 @@ public class UsuarioAngularResource {
 	public ResponseEntity<Void> insert(@Valid @RequestBody UsuarioNewDTO objDTO) {
 		Usuario obj = service.fromDTO(objDTO);
 		obj = service.insert(obj);
-		service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId())
 				.toUri();
 
