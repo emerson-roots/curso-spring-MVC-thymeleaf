@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.security.JWTAuthenticationFilter;
+import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.security.JWTAuthorizationFilter;
 import com.emerson.curso_spring_boot_MVC_com_thymeleaf.angular.security.JWTUtil;
 
 /**
@@ -45,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * qualquer implementação fora do curso passará pelo processo de
 	 * verificação de autorização 
 	 * 
-	 * ATENÇÃO: o indice "/**" permite todas requisições GET para o frontend ANGULAR também*/
+	 * ATENÇÃO: o indice "/" permite todas requisições GET para o frontend ANGULAR também*/
 	private static final String[] PUBLIC_MATCHERS_THYMELEAF = { 
 			"/departamentos/**", 
 			"/cargos/**", 
@@ -53,7 +55,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/webjars/**", 
 			"/css/**", 
 			"/image/**",
-			"/**"};
+			"/"};
+	
+	private static final String[] ANGULAR_PUBLIC_MATCHERS_GET = {
+			"/department**",
+			"/office/**",
+	};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -62,10 +69,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests()
 			.antMatchers(PUBLIC_MATCHERS_THYMELEAF).permitAll()
+			.antMatchers(HttpMethod.GET, ANGULAR_PUBLIC_MATCHERS_GET).permitAll()
 			.anyRequest().authenticated();
 		
 		// adiciona filtro de autenticacao
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+		
+		// adiciona filtro de autorizacao
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 
 		// define que a aplicação é STATELESS - assegura que nosso back end nao cria
 		// sessão de usuário
