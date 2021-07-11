@@ -5,7 +5,6 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -56,11 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/css/**", 
 			"/image/**",
 			"/"};
-	
-	private static final String[] ANGULAR_PUBLIC_MATCHERS_GET = {
-			"/department**",
-			"/office/**",
-	};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -69,8 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests()
 			.antMatchers(PUBLIC_MATCHERS_THYMELEAF).permitAll()
-			.antMatchers(HttpMethod.GET, ANGULAR_PUBLIC_MATCHERS_GET).permitAll()
-			.anyRequest().authenticated();
+			.anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(CustomAuthenticationEntryPoint.authenticationEntryPoint());
 		
 		// adiciona filtro de autenticacao
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
