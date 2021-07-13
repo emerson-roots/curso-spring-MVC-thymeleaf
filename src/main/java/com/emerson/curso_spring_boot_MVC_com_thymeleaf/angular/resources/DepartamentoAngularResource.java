@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,8 @@ public class DepartamentoAngularResource {
 
 	@Autowired
 	private DepartamentoAngularService service;
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Departamento departamento) {
 
@@ -40,7 +42,8 @@ public class DepartamentoAngularResource {
 	public ResponseEntity<List<Departamento>> findAll() {
 		return ResponseEntity.ok().body(service.findAll());
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
@@ -52,7 +55,8 @@ public class DepartamentoAngularResource {
 		Departamento obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody Departamento obj, @PathVariable Long id) {
 		service.update(obj);
