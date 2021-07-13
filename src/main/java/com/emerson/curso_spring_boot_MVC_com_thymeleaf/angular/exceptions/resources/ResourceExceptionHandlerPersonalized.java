@@ -52,7 +52,7 @@ public class ResourceExceptionHandlerPersonalized {
 			HttpServletRequest pRequest) {
 
 		StandardErrorPersonalized err = new StandardErrorPersonalized(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(),
-				"Acesso proibido: Você não tem permissão para acessar este recurso.", e.getMessage(), pRequest.getRequestURI());
+				e.getMessage(), "Não autorizado: Seu perfil de usuário não tem permissão para acessar este recurso.", pRequest.getRequestURI());
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
 

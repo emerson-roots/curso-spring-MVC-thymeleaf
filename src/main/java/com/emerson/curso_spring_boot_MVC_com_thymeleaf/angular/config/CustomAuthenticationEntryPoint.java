@@ -26,13 +26,13 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 	public void commence(HttpServletRequest req, HttpServletResponse res, AuthenticationException authException)
 			throws IOException, ServletException {
 		res.setContentType("application/json");
-		res.setStatus(403);
+		res.setStatus(401);
 		res.getWriter().append(json(req.getRequestURI()));
 	}
 
 	private String json(String path) {
 		long date = new Date().getTime();
-		return "{\"timestamp\": " + date + ", " + "\"status\": 403, " + "\"error\": \"Acesso negado\", "
+		return "{\"timestamp\": " + date + ", " + "\"status\": 401, " + "\"error\": \"Acesso negado\", "
 				+ "\"message\": \"Você precisa estar logado para acessar este recurso.\", "
 				+ "\"path\": \"" + path + "\"}";
 	}
