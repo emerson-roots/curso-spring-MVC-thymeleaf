@@ -31,6 +31,7 @@ public class FuncionarioAngularResource {
 	@Autowired
 	private FuncionarioAngularService service;
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody FuncionarioDTO funcionarioDTO) {
 
@@ -49,13 +50,15 @@ public class FuncionarioAngularResource {
 	public ResponseEntity<List<Funcionario>> findAll() {
 		return ResponseEntity.ok().body(service.findAll());
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/search/name", method = RequestMethod.GET)
 	public ResponseEntity<List<Funcionario>> findAllByName(
 			@RequestParam(value = "nome", defaultValue = "") String nome) {
@@ -64,13 +67,15 @@ public class FuncionarioAngularResource {
 		return ResponseEntity.ok().body(list);
 
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/search/office", method = RequestMethod.GET)
 	public ResponseEntity<List<Funcionario>> findAllByCargo(@RequestParam(value = "id", defaultValue = "") Long id) {
 		List<Funcionario> list = service.findAllByCargo(id);
 		return ResponseEntity.ok().body(list);
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/search/date", method = RequestMethod.GET)
 	public ResponseEntity<List<Funcionario>> findAllByDataEntradaDataSaida(
 			@RequestParam(name = "dataEntrada", required = false, defaultValue = "") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataEntrada,
@@ -88,20 +93,23 @@ public class FuncionarioAngularResource {
 
 		return ResponseEntity.ok().body(list);
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Funcionario> findById(@PathVariable Long id) {
 		Funcionario obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody FuncionarioDTO funcionarioDTO, @PathVariable Long id) {
 		Funcionario funcUpdate = service.fromDTO(funcionarioDTO);
 		service.update(funcUpdate);
 		return ResponseEntity.noContent().build();
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/ufs", method = RequestMethod.GET)
 	public ResponseEntity<UF[]> getUFs() {
 		return ResponseEntity.ok().body(UF.values());
