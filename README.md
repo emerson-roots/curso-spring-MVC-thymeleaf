@@ -1,5 +1,5 @@
 # Spring Boot | Spring MVC | Spring Security | JSON Web Token (JWT) | Angular 12 como contribuição e portfolio
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/emerson-roots/exemplo_readme/blob/main/LICENSE) 
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/emerson-roots/curso-spring-MVC-thymeleaf/blob/master/LICENSE) 
 
 ## Este projeto contempla 02 aplicações/versões distintas e suas modificações podem ser observadas em 03 branchs conforme descrito abaixo.
 
